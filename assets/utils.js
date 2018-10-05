@@ -34,7 +34,7 @@ function setUrlFromString(value) {
 }
 
 function parseLayerParam(number, options) {
-  var defaultLayer = options.firstLayer ? 270 : 269;
+  var defaultLayer = options.firstLayer ? 5 : 32;
   var canvas = document.querySelector("canvas");
   var num = Number(number);
   if (isNaN(num))

@@ -15,6 +15,10 @@ If these images don't exist in the HTML, the page doesn't work.
 
 You should see https://github.com/gjtorikian/Earthbound-Battle-Backgrounds-JS for a detailed explanation of the earthbound battle background system.
 
+## Live Version
+
+You can see a live version of it at http://spacey.lv/earthbound/ 
+
 ## Possible improvements
 
 Honestly this could hopefully be adapted to not need to use Earthbound's animation data, but be able to use custom animation data. 

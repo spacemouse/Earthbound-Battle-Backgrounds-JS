@@ -1,24 +1,35 @@
-import { readBlock, snesToHex } from './rom'
 import ROMGraphics from './rom_graphics'
 export default class BackgroundGraphics {
   constructor (index, bitsPerPixel) {
-    this.arrayROMGraphics = null
     this.romGraphics = new ROMGraphics(bitsPerPixel)
     this.read(index)
   }
   read (index) {
-    /* Graphics pointer table entry */
-    const graphicsPointerBlock = readBlock(0xD7A1 + index * 4)
-    /* Read graphics */
-    this.romGraphics.loadGraphics(readBlock(snesToHex(graphicsPointerBlock.readInt32())))
-    /* Arrangement pointer table entry */
-    const arrayPointerBlock = readBlock(0xD93D + index * 4)
-    const arrayPointer = snesToHex(arrayPointerBlock.readInt32())
-    /* Read and decompress arrangement */
-    const arrayBlock = readBlock(arrayPointer)
-    this.arrayROMGraphics = arrayBlock.decompress()
+    this.imageData = this.readFromPng(index)
   }
   draw (bitmap, palette) {
-    return this.romGraphics.draw(bitmap, palette, this.arrayROMGraphics)
+    return this.romGraphics.draw(bitmap, palette, this.imageData)
+  }
+  readFromPng(index) {
+    if (index === 0) {
+      return new Uint16Array(256 * 256 * 4)
+    }
+    let canvasTemp = document.createElement("canvas")
+    let ctxTemp = canvasTemp.getContext("2d")
+    canvasTemp.width = 256
+    canvasTemp.height = 256
+    if (index % 2 === 0) {
+      let img = document.getElementById("my-png-0")
+      ctxTemp.drawImage(img, 0, 0, 256, 256)
+    } else {
+      let img = document.getElementById("my-png-1")
+      for (let i = 0; i < 4; i ++){
+        for (let j = 0; j < 4; j ++){
+          ctxTemp.drawImage(img, 64 * j, 64 * i, 64, 64)
+        }
+      }
+    }
+    let imageData = ctxTemp.getImageData(0, 0, 256, 256)
+    return imageData.data
   }
 }

@@ -104,7 +104,12 @@
 
     <section class="center pa3 ph5-ns">
       <h3>What this is</h3>
-      <p class="lh-copy">A modification of <a href="https://github.com/gjtorikian/Earthbound-Battle-Backgrounds-JS">gjtorikian's Earthbound-Battle-Backgrounds-JS</a>, modified to use PNG images as input.
+      <p class="lh-copy">A modification of <a href="https://github.com/gjtorikian/Earthbound-Battle-Backgrounds-JS">gjtorikian's Earthbound-Battle-Backgrounds-JS</a>, modified to use PNG images as input. It even works with transparency!
+	  <table>
+	  <tr><th>Large Image</th><th>Tiled Image</th></tr>
+	  <tr><td><img src="data/proc1.png" id="my-png-0" /></td>
+      <td><img src="data/tile.png" id="my-png-1" /></td></tr>
+	  </table>
     </section>
 
     <footer class="pv2 ph3 ph5-m ph6-l mid-gray">
@@ -113,8 +118,7 @@
 
     </section>
   </section>
-  <img src="data/proc1.png" id="my-png-0" style="display:none" />
-    <img src="data/tile.png" id="my-png-1" style="display:none" />
+  
   <script src="dist/index.js"></script>
   <script>setTimeout(() => document.querySelector("canvas-overlay").style.opacity = 0)</script>
 </body>
